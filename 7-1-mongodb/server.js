@@ -213,12 +213,31 @@ async function createStudents() {
    }
 // read document
 
+   async function readStudents() {
+      const all = await Student.find();
+      console.log("📚 Students:", all);
+      return all;
+   }
 
 // update document
-
+async function updateStudent() {
+      const res = await Student.updateOne({ name: "Ali" }, { $set: { age: 22 } });
+      if (res.matchedCount || res.nModified) {
+         console.log("✅ Updated Ali");
+      } else {
+         console.log("ℹ️  No matching document to update for Ali");
+      }
+   }
 
 // delete document
-
+ async function deleteStudent() {
+      const res = await Student.deleteOne({ name: "Sara" });
+      if (res.deletedCount) {
+         console.log("✅ Deleted Sara");
+      } else {
+         console.log("ℹ️  No matching document to delete for Sara");
+      }
+   }
 
 
 
