@@ -169,7 +169,7 @@
 
 import mongoose from "mongoose";
 
-// establish connection
+// establish  connection
 
 
 // define schema
