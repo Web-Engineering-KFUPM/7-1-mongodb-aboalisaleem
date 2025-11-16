@@ -199,7 +199,18 @@ const studentSchema = new mongoose.Schema({
 
 // create document
 
-
+async function createStudents() {
+      const count = await Student.countDocuments();
+      if (count === 0) {
+         await Student.insertMany([
+            { name: "Ali", age: 21, major: "CS" },
+            { name: "Sara", age: 23, major: "SE" },
+         ]);
+         console.log("✅ Inserted sample students");
+      } else {
+         console.log("ℹ️  Skipping insert — collection already has documents");
+      }
+   }
 // read document
 
 
