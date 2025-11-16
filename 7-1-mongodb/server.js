@@ -167,10 +167,26 @@
  * 
  */
 
-import mongoose from "mongoose";
+import mongoose from "mongoose";const MONGODB_URI = process.env.MONGODB_URI ||
+   "mongodb+srv://<username>:<password>@cluster0.mongodb.net/test?retryWrites=true&w=majority";
 
-// establish  connection
+if (MONGODB_URI.includes("<password>") || MONGODB_URI.includes("<username>")) {
+   console.warn(
+      "⚠️  Warning: MONGODB_URI uses placeholder credentials. Replace with your connection string or set the MONGODB_URI environment variable."
+   );
+}
 
+async function main() {
+   try {
+      await mongoose.connect(MONGODB_URI, {
+         useNewUrlParser: true,
+         useUnifiedTopology: true,
+      });
+      console.log("✅ Connected to MongoDB");
+   } catch (err) {
+      console.error("❌ MongoDB connection error:", err.message || err);
+      process.exit(1);
+   }
 
 // define schema
 
